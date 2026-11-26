@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>فرم سؤال‌های تیم نیلاکاپ</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap">
+<style>
+:root{--bg:#fffdf8;--card:#fff;--tx:#1d1d1d;--mu:#6b6b6b;--ac:#6e0f14;--ln:#e5ddd0;--hl:#fdc95a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17130f;--card:#221c16;--tx:#f2ebe0;--mu:#a89d8c;--ac:#fdc95a;--ln:#3a3128;--hl:#6e0f14}}
+:root[data-theme="dark"]{--bg:#17130f;--card:#221c16;--tx:#f2ebe0;--mu:#a89d8c;--ac:#fdc95a;--ln:#3a3128;--hl:#6e0f14}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Vazirmatn",Tahoma,sans-serif;line-height:1.8}
+main{max-width:760px;margin:0 auto;padding:16px}
+h1{font-size:22px;margin:8px 0 4px}
+.sub{color:var(--mu);font-size:14px;margin:0 0 16px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:8px 0;z-index:5;border-bottom:1px solid var(--ln);font-size:13px;color:var(--mu)}
+.prog{height:6px;background:var(--ln);border-radius:3px;margin-top:6px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--ac)}
+.grp{background:var(--card);border:1px solid var(--ln);border-radius:12px;margin:14px 0;padding:6px 14px 14px}
+.grp h2{font-size:17px;margin:12px 0 4px;color:var(--ac)}
+.tag{display:inline-block;background:var(--hl);color:var(--tx);font-size:11px;border-radius:8px;padding:0 8px;margin-inline-start:6px}
+label{display:block;font-size:14.5px;font-weight:600;margin:14px 0 4px}
+textarea{width:100%;box-sizing:border-box;min-height:64px;padding:8px 10px;border:1px solid var(--ln);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit;font-size:14px;resize:vertical}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+button{font:inherit;font-size:14px;padding:8px 14px;border-radius:8px;border:1px solid var(--ac);background:var(--ac);color:var(--bg);cursor:pointer}
+button.s{background:transparent;color:var(--ac)}
+#out{direction:ltr;text-align:left;min-height:180px;font-family:ui-monospace,Menlo,monospace;font-size:12px;display:none}
+.note{font-size:13px;color:var(--mu)}
+</style>
+</head>
+<body>
+<main>
+<h1>سؤال‌های تیم نیلاکاپ</h1>
+<p class="sub">فروش سرد: جلسهٔ ۳ آذر ۱۴۰۵ با مهدی و مجتبی. پاسخ‌ها خودکار در همین مرورگر ذخیره می‌شود. در پایان خروجی بگیرید و در مخزن گیت‌هاب ثبت کنید.</p>
+<div class="bar"><span id="cnt">۰ از ۰ پاسخ داده شد</span><div class="prog"><i id="pg"></i></div></div>
+<div id="form"></div>
+<div class="acts">
+<button id="bmd">خروجی Markdown</button>
+<button id="bjs" class="s">خروجی JSON</button>
+<button id="bcp" class="s">کپی</button>
+<button id="brs" class="s">پاک‌کردن همه</button>
+</div>
+<p class="note">دکمه‌های خروجی متن را پایین می‌نویسند تا با «کپی» به فایل <code>answers.md</code> یا <code>answers.json</code> در گیت‌هاب بچسبانید.</p>
+<textarea id="out" readonly></textarea>
+</main>
+<script>
+var G=[
+["۱. محصول و قیمت",[
+["کاتالوگ آبان تا چه زمانی معتبر است؟ بعد از آن چه تغییری دارد؟",1],
+["کدام ۲ تا ۳ محصول را اول بفروشند؟",1],
+["کدام محصولات حاشیهٔ سود بیشتر دارند و کدام فقط برای جذب مشتری‌اند؟"]]],
+["۲. شرایط فروش",[
+["شرایط پرداخت: نقد، چک یا اعتباری؟ پیش‌پرداخت سفارش اختصاصی چقدر است؟",1],
+["زمان تحویل طرح عمومی و اختصاصی؟ ارسال رایگان هست؟",1],
+["ویزیتور تا چند درصد حق تخفیف دارد و با تأیید چه کسی؟",1],
+["سیاست نمونه: رایگان، ارزان یا بازگشتی؟ سقف ماهانه و بودجه؟",1],
+["طراحی اختصاصی (چاپ و کلیشه) را چه کسی و چطور انجام می‌دهد؟"]]],
+["۳. مشتری و لید",[
+["مشتری ایده‌آل: اولویت بین کافه، بستنی‌فروشی، فست‌فود، قنادی و غیره؟",1],
+["فروش به مشتریان قدیمی در پاداش ویزیتور حساب می‌شود؟",1],
+["آمار فعلی: نرخ تبدیل تماس‌ها، میانگین ارزش سفارش، سیکل فروش (اولین تماس تا سفارش)؟"]]],
+["۴. پاداش و تارگت",[
+["«فروش» برای پاداش یعنی سفارش ثبت‌شده، تحویل‌شده یا وصول‌شده؟",1],
+["مرجوعی، لغو و چک برگشتی در پاداش لحاظ می‌شود؟"],
+["دورهٔ رمپ (ماه‌های اول) و پاداش فعالیت‌محور را قبول دارند؟"],
+["بازنگری تارگت‌ها بعد از چند ماه و چطور؟"]]],
+["۵. پس از فروش",[
+["پیگیری پس از فروش (تحویل، تماس مجدد، سفارش تکراری) با کیست؟"]]]
+];
+var K="nillacup-answers-v2",A={},ids=[];
+try{A=JSON.parse(localStorage.getItem(K)||"{}")}catch(e){A={}}
+var f=document.getElementById("form"),n=0;
+G.forEach(function(g,gi){
+ var d=document.createElement("div");d.className="grp";
+ var h=document.createElement("h2");h.textContent=g[0];d.appendChild(h);
+ g[1].forEach(function(q,qi){
+  var id="q"+gi+"_"+qi;ids.push(id);n++;
+  var l=document.createElement("label");l.setAttribute("for",id);l.textContent=q[0];
+  if(q[1]){var t=document.createElement("span");t.className="tag";t.textContent="قبل از آگهی";l.appendChild(t)}
+  var ta=document.createElement("textarea");ta.id=id;ta.value=A[id]||"";
+  ta.addEventListener("input",function(){A[id]=ta.value;save();prog()});
+  d.appendChild(l);d.appendChild(ta);
+ });
+ f.appendChild(d);
+});
+function save(){try{localStorage.setItem(K,JSON.stringify(A))}catch(e){}}
+function prog(){var c=ids.filter(function(i){return (A[i]||"").trim()}).length;
+ document.getElementById("cnt").textContent=c+" از "+n+" پاسخ داده شد";
+ document.getElementById("pg").style.width=(c/n*100)+"%"}
+function md(){var o="# پاسخ‌های جلسهٔ تیم نیلاکاپ\n";
+ G.forEach(function(g,gi){o+="\n## "+g[0]+"\n";g[1].forEach(function(q,qi){
+  o+="\n**"+q[0]+"**\n\n"+((A["q"+gi+"_"+qi]||"").trim()||"_بدون پاسخ_")+"\n"})});return o}
+function js(){var r=[];G.forEach(function(g,gi){g[1].forEach(function(q,qi){
+ r.push({group:g[0],question:q[0],before_hiring:!!q[1],answer:(A["q"+gi+"_"+qi]||"").trim()})})});
+ return JSON.stringify(r,null,2)}
+var out=document.getElementById("out");
+function show(s){out.style.display="block";out.value=s;out.focus();out.select()}
+document.getElementById("bmd").onclick=function(){show(md())};
+document.getElementById("bjs").onclick=function(){show(js())};
+document.getElementById("bcp").onclick=function(){if(!out.value)show(md());
+ try{navigator.clipboard.writeText(out.value)}catch(e){document.execCommand&&document.execCommand("copy")}};
+document.getElementById("brs").onclick=function(){if(confirm("همهٔ پاسخ‌ها پاک شود؟")){A={};save();
+ ids.forEach(function(i){document.getElementById(i).value=""});prog()}};
+prog();
+</script>
+</body>
+</html>
